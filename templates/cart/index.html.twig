@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block content %}
+<div class="row">
+   <div class="column" style=";">
+      <h1>Panier</h1>
+   </div>
+   <div class="column column-content" style="">
+<h3> Nous ne livrons pas, venez récupérer votre commande à la librairie </h3>
+<h3> Pour en savoir plus sur le click and collect cliquez-ici </h3>
+
+      <div class="btn-column">
+      
+      </div>
+   </div>
+</div>
+
+{% if cart|length > 0 %}
+
+<div class="cart">
+<table class="">
+  <thead>
+    <tr>
+          <th scope=""></th>
+
+      <th scope="col">nom du produit</th>
+      <th scope="col">quantité</th>
+      <th scope="col">prix</th>
+      <th scope="col">total</th>
+      <th scope="col"></th>
+
+    </tr>
+  </thead>
+  <tbody>
+  {% set total = null %}
+  {% for product in cart %}
+    <tr>
+    <th> <img src="/uploads/{{product.product.illustration}}" alt="{{product.product.name}}" height="150px"><br></th>
+      <td class="name-item">{{product.product.name}}</td>
+      <td>    
+      <a href="{{ path('decrease_to_cart', {'id' : product.product.id})}}">
+        <img src=" {{ asset('assets/picture/minus.png') }} " alt="minus" width="10px" color="" /></a>
+{{product.quantity}}
+<a href="{{path('add_cart', {'id' : product.product.id}) }}">
+  <img src=" {{ asset('assets/picture/plus.png') }} " alt="plus" width="10px" /></a>
+</td>
+      <td>{{(product.product.price / 100) | number_format(2) }}euros</td>
+      <td>{{((product.product.price * product.quantity) / 100) | number_format(2) }}euros</td>
+      <td>      <a href="{{ path('delete_to_cart', {'id' : product.product.id }) }}"><img src=" {{ asset('assets/picture/delete.png') }} " alt="supprimer" width="20px" /></a>
+  </td>
+    </tr>
+
+    {% set total = total + (product.product.price * product.quantity) %}
+   {% endfor %}
+  </tbody>
+</table>
+
+<div class="checkout">
+nombre de produit: {{cart | length}}
+</br>
+total de mon panier : {{ (total / 100 ) | number_format(2) }} euros.
+<br>
+<a href="{{ path('order')}}" class="button">Paiement</a>
+
+</div>
+</div>
+
+
+<!-- si est vide  -->
+
+ {% else %}
+
+<p> Panier vide </p>
+
+{% endif %}
+
+{% endblock %}

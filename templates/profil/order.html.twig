@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block content %}
+
+<div class="container-account">
+
+<h1 class="titre"> Mes commandes. </h1>
+<a href="{{ path('profil') }}" class="learn-more"><i class="fas fa-chevron-right"></i> Retour </a>
+
+<h2> Si vous avez la moindre question vous pouvez nous contacter à : hydre@mail.com </h2>
+<br>
+
+<hr>
+
+{% if orders|length == 0 %}
+
+<h2> Aucune commande enregistrée à ce jour.   </h2> 
+
+{% else %}
+<table class="">
+  <thead>
+    <tr>
+      <th scope="col">Passée le </th>
+      <th scope="col">Référence</th>
+            <th scope="col">Statut</th>
+
+      <th scope="col">Produit(s)</th>
+      <th scope="col">Total</th>
+            <th scope="col"></th>
+
+    </tr>
+  </thead>
+    <tbody>
+
+{% for order in orders %}
+
+    <tr>
+      <th scope="row"> {{ order.createdAt|date('d/m/Y') }} </th>
+      <td> {{ order.reference }} </td>
+            <td>
+            
+            {% if order.state == 1 %}
+payée
+            {% elseif order.state == 2 %}
+en cours de préparation
+                        {% elseif order.state == 3 %}
+
+            prête
+            {% endif %}
+             </td>
+
+      <td> {{ order.orderDetails | length }} </td>
+      <td>{{ (order.getTotal / 100) | number_format(2)  }}</td>
+            <td> <a href="{{ path('profil_order_show', {'reference' : order.reference }) }}"> Voir plus </a></td>
+    </tr>
+ 
+
+{% endfor %}
+ </tbody>
+</table>
+
+ {% endif %}
+</div>
+ 
+{% endblock %}

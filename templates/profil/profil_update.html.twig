@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier profil {% endblock %}
+
+{% block content %}
+
+
+<div class="container-profil">
+<h1 class="titre"> Modifier mes coordonnés </h1>
+
+<a href="{{ path('profil') }}" class="learn-more"> <i class="fas fa-chevron-right"></i> Retour profil </a>
+{% if notification %}
+<div class=""> {{ notification }} </div>
+{% endif %}
+<div class="form-container">
+<div class="form">
+{{ form(form) }}
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

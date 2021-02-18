@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block javascript %}
+    <script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}
+
+{% block title %}Récapitulatif avant paiement{% endblock %}
+
+{% block content %}
+
+<div class="row">
+   <div class="column" style=";">
+      <h1>L'HYDRE AUX MILLES TÊTES</h1>
+   </div>
+   <div class="column column-content" style="">
+      <h2>librairie l'hydre aux milles têtes</h2>
+      <h2>96 rue saint Savournin <br> 13001 Marseille</h2>
+      <h2>ouverte du mardi au samedi de 10h à 20h</h2>
+      <div class="btn-column">
+         <a href="" class="button"> E-Shop </a>
+         <a href="" class="button"> Event </a>
+      </div>
+   </div>
+</div>
+<p> Coordonnés </p>
+
+{{ delivery|raw }}
+
+  {% set total = null %}
+
+  {% for product in cart %}
+  
+<img src="/uploads/{{product.product.illustration}}" alt="{{product.product.name}}" height="100px">
+<div class="">{{product.product.name}} </div>
+
+<div class="">{{(product.product.price / 100) | number_format(2) }}euros
+</div>
+<div class=""> | x {{product.quantity}}
+
+</div>
+
+    {% set total = total + (product.product.price * product.quantity) %}
+
+{% endfor %}
+
+<hr>
+<strong class="">  valeur totale : {{ (total / 100 ) | number_format(2) }} euros.
+  </strong>
+<a id="checkout-button" class="button"> Payer </a>
+
+
+{% endblock %}
+
+{% block script %}
+
+ <script type="text/javascript">
+
+    var stripe = Stripe("pk_test_51IGkgZGmXhpNP8kE5nKbQeJsN5q1dmEYtYMtOzbZTH6JIrev6IiXELe2GPkJ6ActNCZb7ZZiQC4t4vzYcKj9fgE100i407sHqU");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("/commande/create-session/{{reference}}", {
+        method: "POST",
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {  
+
+          if (session.error == 'order'){
+
+          } else {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+
+          }
+
+        })
+        .then(function (result) {
+   
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+  </script>
+
+  {% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{products.name}}{% endblock %}
+
+{% block content %}
+
+        <section id="container-item">
+            <section id="box-img-item">
+
+<img src="/uploads/{{products.illustration}}" alt="{{products.name}}" class="">
+</section>
+                <article id="presentation-item">
+
+<h1> {{products.name}} </h1>
+<p> {{products.subtitle}} </p>
+
+<!-- Prix des articles + formatage en euros -->
+                        <section id="price-item">
+
+{{(products.price / 100) | number_format(2) }}euros
+<button onclick="myFunction()" class="button" id="myBtn">Description</button>
+
+    <p> {{products.description}} </p>
+</section>
+
+<!-- AJOUT PANIER -->
+<a href="{{path('add_cart', {'id' : products.id}) }}" class="button"> Ajouter </a>
+</section>
+</article>
+
+<a href="{{ path('products') }}">Retour</a> 
+
+{% endblock %}

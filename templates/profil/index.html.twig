@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil {% endblock %}
+
+{% block content %}
+
+<h1 class="titre"> Votre profil {{ app.user.firstname}} </h1>
+
+<p> Que voulez-vous faire ?</p>
+
+<div class="container-profil">
+
+{% if is_granted('ROLE_ADMIN')%}
+<a href="/admin"> <strong> Accéder au panel administrateur </strong> </a> 
+{% endif %}
+
+<div class="column-profil"> <a href="{{ path('profil_update') }}"> Modifier mes informations </a> 
+</div>
+<div class="column-profil"><a href="{{ path('profil_address') }}"> Gérer mes adresses </a> 
+ </div>
+<div class="column-profil">  <a href="{{ path('profil_order') }}"> Gérer mes commandes </a> 
+</div>
+<div class="column-profil"> <a href="{{ path('app_logout') }}"> déconnexion </a>
+</div>
+
+</a>
+</div>
+{% endblock %}

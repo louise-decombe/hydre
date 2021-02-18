@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nous contacter{% endblock %}
+
+{% block content %}
+
+<div class="row">
+   <div class="column" style=";">
+      <h1>CONTACT</h1>
+   </div>
+   <div class="column column-content" text-align="left" style="">
+      <h2>Laissez nous un message ici</h2>
+      <h2>Nous vous répondons dès que possible</h2>
+      <h2>nous sommes ouverts du mardi au samedi de 10h à 20h</h2>
+      <div class="btn-column">
+         <a href="" class="button"> FAQ </a>
+         <a href="" class="button"> MENTIONS LEGALES </a>
+      </div>
+   </div>
+</div>
+
+
+<div class="form-container">
+<div class="form">
+
+{% for message in app.flashes('notice') %}
+<div class="alert alert-info"> {{message}} </div>
+{% endfor %}
+<div class="row">
+
+
+{{ form(form) }}
+</div>
+</div>
+</div>
+
+{% endblock %}

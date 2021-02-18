@@ -1,0 +1,70 @@
+
+.form-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.form {
+	background: white;
+	padding: 50px 100px;
+    margin: 2%;
+	border: 2px solid black;
+	box-shadow: 15px 15px 1px #310251, 15px 15px 1px 2px black;
+    width: 600px;
+}
+
+input, textarea {
+	display: block;
+	width: 100%;
+	font-size: 14pt;
+	line-height: 28pt;
+	margin-bottom: 28pt;
+	border: none;
+	border-bottom: 5px solid black;
+	background: white;
+	min-width: 250px;
+	padding-left: 5px;
+	outline: none;
+	color: black;
+}
+
+input:focus, textarea:focus {
+	border-bottom: 5px solid #310251;
+}
+
+button {
+	display: block;
+	margin: 0 auto;
+	line-height: 28pt;
+	padding: 0 20px;
+	background: #310251;
+	letter-spacing: 2px;
+	transition: .2s all ease-in-out;
+	outline: none;
+	border: 1px solid black;
+	box-shadow: 3px 3px 1px white, 3px 3px 1px 1px black;
+    color:white;
+    font-size: 20px;
+}
+
+button:hover {
+	background: black;
+	color: white;
+	border: 1px solid black;
+}
+
+::selection {
+	background: white;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+	border-bottom: 5px solid #310251;
+	-webkit-text-fill-color: #310251;
+	-webkit-box-shadow: 0 0 0px 1000px white inset;
+	transition: background-color 5000s ease-in-out 0s;
+}

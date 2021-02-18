@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Les livres{% endblock %}
+
+{% block content %}
+
+
+<h1 class="titre"> Les livres </h1>
+      <a href="{{ path('shop') }}" class="learn-more"> Retour <i class="fas fa-chevron-right"></i> </a>
+
+<div class="container-item">
+
+
+{% for product in products %}
+
+<div class="item-listed col">
+
+<a href="{{ path('product', {'slug': product.slug})}}"><img src="/uploads/{{product.illustration}}" alt="image produit" class="img-fluid" width=""></a>
+<!-- <h4> {{product.name}} </h4>
+<span> {{product.subtitle}} </span>  -->
+<p class="item-listed-price"> {{(product.price / 100) | number_format(2) }}euros </p>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

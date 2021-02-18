@@ -1,0 +1,371 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+html {
+  height:100%;
+} 
+
+
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+}
+
+body {
+	font-family: 'Roboto', sans-serif;
+  min-height:100%;
+}
+
+
+/** SHOP  **/
+
+
+/** STYLE CONTAINER ET CATEGORIES  **/
+
+.categorie-listed {
+	display: flex;
+	flex-direction: row;
+  padding: 1%;
+  margin:1%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-catalogue a {
+	text-decoration: none;
+	color: black;
+  font-size:30px;
+}
+
+.container-catalogue a:hover {
+	text-decoration: none;
+	color: lightgray;
+}
+
+.container-catalogue {
+	display: flex;
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.categorie-catalogue {
+	display: flex;
+	flex-direction: row;
+	padding: 1%;
+}
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+
+/*** ITEM  ***/
+
+/* HOME */
+
+.column {
+	float: left;
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+  justify-content: center;
+
+}
+
+.column h2 {
+	text-align: left;
+	letter-spacing: 5px;
+	line-height: 180%;
+}
+
+.column img {
+	width: 50%;
+	margin: 1%;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+
+.column h1 {
+	font-size: 110px;
+	padding: 2%;
+	margin-left: 3%;
+	color: #310251;
+	letter-spacing: 10px;
+  line-height: 140%;
+}
+
+.column h2 {
+	text-align: left;
+}
+
+.center {
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.column-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	text-align: justify;
+}
+
+.column-content p {
+	font-size: 20px;
+}
+
+.violet-column {
+	background-color: #310251;
+	color: white;
+	width: 94%;
+	height: 50%;
+	margin-left: 2%;
+	margin-right: 2%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding-top: 0%;
+}
+
+.violet-column h1 {
+	border: white solid 10px;
+	padding: 2%;
+}
+
+.violet-column h1:hover {
+	border: white solid 15px;
+	padding: 3%;
+}
+
+.hero-image {
+	background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url("https://www.livre-paca.org/lib_php/download.php?fileID=824&type=Image&round=160973388");
+	height: 70%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	width: 100%;
+}
+
+.button {
+	background-color: #310251;
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	letter-spacing: 0.15em;
+}
+
+.button:hover {
+	background-color: #310251;
+	opacity: 0.7;
+	border: none;
+	color: white;
+}
+
+.learn-more {
+	color: #310251;
+	text-transform: uppercase;
+	text-decoration: none;
+	letter-spacing: 0.15em;
+	display: inline-block;
+	padding: 15px 20px;
+	position: relative;
+}
+
+.learn-more:after {
+	background: none repeat scroll 0 0 transparent;
+	bottom: 0;
+	content: "";
+	display: block;
+	height: 2px;
+	left: 50%;
+	position: absolute;
+	background: #310251;
+	transition: width 0.3s ease 0s, left 0.3s ease 0s;
+	width: 0;
+}
+
+.learn-more:hover:after {
+	width: 100%;
+	left: 0;
+}
+
+.titre {
+	font-size: 70px;
+	padding: 1%;
+	color: #310251;
+	letter-spacing: 8px;
+}
+
+
+/* Container for flexboxes */
+
+.row2 {
+	display: -webkit-flex;
+	display: flex;
+	text-align: center;
+	align-items: center;
+}
+
+
+.column2 {
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding: 10px;
+	height: 200px;
+	width: 150px;
+	border: #310251 solid 10px;
+	margin: 20px;
+	color: #310251;
+}
+
+.column2 a {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+text-align: center;
+font-size: 30px;
+margin-top: 15%;
+
+}
+
+
+/* PROFIL */
+
+.container-profil {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.column-profil {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	width: 20%;
+	padding: 2%;
+	margin: 2%;
+	color: white;
+	background-color: #310251;
+	text-align: center;
+	border: 1px solid black;
+	box-shadow: 3px 3px 1px white, 3px 3px 1px 1px black;
+	flex-wrap: wrap;
+}
+
+.column-profil a {
+	color: white;
+	font-size: 20px;
+	text-transform: uppercase;
+}
+
+.column-profil a:hover {
+	opacity: 0.7;
+}
+
+
+/* LISTE ITEM LIVRES */
+
+.container-item {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin: 2%;
+	flex-wrap: wrap;
+}
+
+.item-listed {
+	width: 200px;
+	height: 300px;
+	margin: 20px;
+}
+
+.item-listed img {
+	width: 100%;
+	height: 90%;
+	border: 2px solid #310251;
+	box-shadow: 10px 10px 1px white, 10px 10px 1px 2px #310251;
+}
+
+.item-listed-price {
+	text-align: center;
+}
+
+.container-new {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin-bottom: 2%;
+	margin-top: 2%;
+}
+
+.container-new h1,
+h2 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 1%;
+}
+
+
+.container-adress {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.address {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+margin: 1%;  
+padding: 2%;
+border: black solid 5px;
+}
+
+.address p, h5 {
+  font-size: 20px;
+}
+
+.chercher {
+  width: 50%;
+  color:white;
+  background-color:#310251;
+  padding:2%;
+  margin:2%;
+ 
+}
+
+.chercher h2 {
+  color:white;
+  background-color:#310251 ;
+  display: flex;
+  flex-direction: row;
+}

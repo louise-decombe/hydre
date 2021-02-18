@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block content %}
+
+<h1 class="titre"> Inscription </h1>
+
+{% if notification %}
+
+<div class="">
+{{ notification }}
+</div>
+ 
+{% endif %}
+
+<div class="form-container">
+<div class="form">
+
+{{form_start(form)}}
+
+<div class="">
+{{ form_row(form.firstname) }}
+</div>
+<div class="">
+{{ form_row(form.lastname) }}
+</div>
+<div class="">
+{{ form_row(form.email) }}
+</div>
+<div class="">
+{{ form_row(form.password) }}
+</div>
+
+
+
+{{form_end(form)}}
+
+</div>
+</div>
+{% endblock %}

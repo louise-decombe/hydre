@@ -1,0 +1,78 @@
+
+<html lang="fr">
+   <head>
+      <!-- méta de la boutique -->
+      <meta charset="utf-8">
+      <meta name="description" content="Librairie Marseillaise">
+      <!-- Icone de la boutique -->
+      <link rel="icon" type="" href="" />
+      <!-- titre de la boutique -->
+      <title> {% block title %} L'hydre aux mille têtes {% endblock %}  </title>
+      <!-- Liens CSS -->
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+      <link href=" {{ asset('assets/css/boutique.css') }} " rel="stylesheet">
+                  <link href=" {{ asset('assets/css/form.css') }} " rel="stylesheet">
+            <link href=" {{ asset('assets/css/header-footer.css') }} " rel="stylesheet">
+            <link href=" {{ asset('assets/css/faq.css') }} " rel="stylesheet">
+            <link href=" {{ asset('assets/css/cart.css') }} " rel="stylesheet">
+
+      <!-- police de caractère  -->
+      <link rel="preconnect" href="https://fonts.gstatic.com">
+      <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+      {% block javascript %}
+      {% endblock %}
+      <!-- HEAD -->
+   </head>
+   <body>
+      <div class="nav">
+         <input type="checkbox" id="nav-check">
+         <div class="nav-btn">
+            <label for="nav-check">
+            <span></span>
+            <span></span>
+            <span></span>
+            </label>
+         </div>
+         <div class="nav-links">
+            <a class="" href="{{ path('home') }}"> LA LIBRAIRIE </a>
+            <a class="" href="{{ path('shop') }}"> E-SHOP </a>
+            <a class="" href=""> EVENEMENTS </a>
+            <a class="" href=""> BLOG </a>
+            {% if app.user %}
+            <a href="{{ path('profil') }}"><i class="fas fa-user"> </i>
+            </a>  
+            {% else %}
+            <a href="{{ path('app_login') }}"> <i class="fas fa-user"></i> </a> </a>
+            {% endif %}
+            <a href="{{ path('cart') }}"> <i class="fas fa-shopping-cart"></i>
+            </a>
+         </div>
+      </div>
+      <main role="main">
+         <!-- Block à intégrer de toutes les autres pages -->
+         {% block content %}
+         {% endblock %}
+         <!-- Footer -->
+   
+   <footer>
+  <div class="footer-bottom">
+    <div class="footer-bottom-copyright-text">
+      &copy; 2021 L'hydre aux mille têtes | All Rights Reserved
+    </div>
+    <div class="footer-bottom-social-icons">
+      <ul id="footer-social-links">
+        <li><a href="#" target="_blank">Mentions légales</a></li> | 
+        <li><a href="#" target="_blank">FAQ</a></li> | 
+        <li><a href="#" target="_blank">Contact</a></li>
+    </div>
+  </div>
+</footer>
+
+      </main>
+      <!-- Scripts de base -->
+          
+   </body>
+   {% block script %}
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+   {% endblock %}
+</html>

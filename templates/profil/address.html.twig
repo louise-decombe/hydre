@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Coordonnés de votre profil{% endblock %}
+
+{% block content %}
+
+
+<div class="row">
+   <div class="column" style=";">
+      <h1>Vos Coordonnés</h1>
+   </div>
+   <div class="column column-content" style="">
+       
+      <div class="btn-column">
+      <a href="{{ path('profil') }}" class="learn-more"> Retour <i class="fas fa-chevron-right"></i>
+
+ </a>
+
+      <a href="{{ path('profil_address_add')}}" class="button" float="right"> ajouter des coordonnés </a>
+
+      </div>
+   </div>
+</div>
+<br>
+
+{% if app.user.addresses|length == 0 %}
+
+<h2> Vous n'avez pas d'adresse pour le moment, veuillez en ajouter une. </h2> 
+
+{% else %}
+
+<div class="container-adress">
+{% for address in app.user.addresses %}
+
+<div class="address">
+    <h5 class=""> {{ address.name }}</h5>
+    <p class="">{{ address.address }} <br>
+{{ address.postal }} <br>{{ address.city }} <br> </p>
+
+    <a href="{{path('profil_address_edit', {'id' : address.id })}}" class="button">Modifier</a>
+        <a href="{{ path('profil_address_delete', { 'id' : address.id })  }}" class="button">Supprimer</a>
+
+</div>
+
+{% endfor %}
+
+</div>
+ {% endif %}
+ 
+{% endblock %}
