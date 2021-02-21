@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1 class="titre"> Inscription </h1>
+<center><h1 class="titre"> Inscription </h1></center>
 
 {% if notification %}
 
@@ -31,7 +31,7 @@
 {{ form_row(form.password) }}
 </div>
 
-
+<a href="{{path('login')}}" class="subscription"> Déjà inscrit ? </a>
 
 {{form_end(form)}}
 
