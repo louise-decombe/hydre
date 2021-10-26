@@ -1,19 +1,18 @@
 <?php
 
 namespace App\Controller\Admin;
-use App\Entity\User;
+
 use App\Entity\Category;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\Subcategory;
-use App\Entity\Order;
-use App\Entity\OrderDetails;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 
 
 class DashboardController extends AbstractDashboardController
@@ -26,7 +25,8 @@ class DashboardController extends AbstractDashboardController
 
         $routeBuilder = $this->get(AdminUrlGenerator::class);
 
-        return $this->redirect($routeBuilder->setController(OrderCrudController::class)->generateUrl());    }
+        return $this->redirect($routeBuilder->setController(OrderCrudController::class)->generateUrl());
+    }
 
 
     public function configureDashboard(): Dashboard

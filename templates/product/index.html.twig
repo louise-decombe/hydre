@@ -5,25 +5,38 @@
 {% block content %}
 
 
-<h1 class="titre"> Les livres </h1>
-      <a href="{{ path('shop') }}" class="learn-more"> Retour <i class="fas fa-chevron-right"></i> </a>
-
-<div class="container-item">
+    <h1 class="titre"> Les livres </h1>
+    <a href="{{ path('shop') }}" class="learn-more"> Retour <i class="fas fa-chevron-right"></i> </a>
 
 
-{% for product in products %}
+    <div class="chercher">
 
-<div class="item-listed col">
+        <h2>  <i class="fas fa-search"></i>
 
-<a href="{{ path('product', {'slug': product.slug})}}"><img src="/uploads/{{product.illustration}}" alt="image produit" class="img-fluid" width=""></a>
-<!-- <h4> {{product.name}} </h4>
-<span> {{product.subtitle}} </span>  -->
-<p class="item-listed-price"> {{(product.price / 100) | number_format(2) }}euros </p>
+            Chercher un livre
+        </h2>         {{ form(form) }}
 
-</div>
+    </div>
 
-{% endfor %}
 
-</div>
+    <div class="container-item">
+
+
+
+    {% for product in products %}
+
+        <div class="item-listed col">
+
+            <a href="{{ path('product', {'slug': product.slug}) }}"><img src="/uploads/{{ product.illustration }}"
+                                                                         alt="image produit" class="img-fluid" width=""></a>
+            <!-- <h4> {{ product.name }} </h4>
+<span> {{ product.subtitle }} </span>  -->
+            <p class="item-listed-price"> {{ (product.price / 100) | number_format(2) }}euros </p>
+
+        </div>
+
+    {% endfor %}
+
+    </div>
 
 {% endblock %}

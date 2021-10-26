@@ -1,33 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{products.name}}{% endblock %}
+{% block title %}{{ products.name }}{% endblock %}
 
 {% block content %}
 
-        <section id="container-item">
-            <section id="box-img-item">
+    <div class="container-single-item">
 
-<img src="/uploads/{{products.illustration}}" alt="{{products.name}}" class="">
-</section>
-                <article id="presentation-item">
+        <div id="box-img-item">
+            <img src="/uploads/{{ products.illustration }}" alt="{{ products.name }}" class="img-item">
+        </div>
 
-<h1> {{products.name}} </h1>
-<p> {{products.subtitle}} </p>
+        <div class="data-product">
+            <h1> {{ products.name }} </h1>
+            <p> {{ products.subtitle }} </p>
 
-<!-- Prix des articles + formatage en euros -->
-                        <section id="price-item">
+            <!-- Prix des articles + formatage en euros -->
+            <section id="price-item">
 
-{{(products.price / 100) | number_format(2) }}euros
-<button onclick="myFunction()" class="button" id="myBtn">Description</button>
+                {{ (products.price / 100) | number_format(2) }}euros
 
-    <p> {{products.description}} </p>
-</section>
+               <div class="container">
+                    <ul class="acc">
+                        <li>
+                            <button onclick="myFunction()" id="myBtn" class=" button acc_ctrl">>Description</button>
+                            <div class=" acc_panel">
+                                <p> {{ products.description }} </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
 
-<!-- AJOUT PANIER -->
-<a href="{{path('add_cart', {'id' : products.id}) }}" class="button"> Ajouter </a>
-</section>
-</article>
+            </section>
 
-<a href="{{ path('products') }}">Retour</a> 
+            <!-- AJOUT PANIER -->
+            <a href="{{ path('add_cart', {'id' : products.id}) }}" class="button"> Ajouter </a>
+            <a href="{{ path('products') }}">Retour</a>
+        </div>
 
+
+    </div>
+
+    {% block JavaScript %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+        <script type="text/javascript">
+            $(function () {
+                $('.acc_ctrl').on('click', function (e) {
+                    e.preventDefault();
+                    if ($(this).hasClass('active')) {
+                        $(this).removeClass('active');
+                        $(this).next()
+                            .stop()
+                            .slideUp(300);
+                    } else {
+                        $(this).addClass('active');
+                        $(this).next()
+                            .stop()
+                            .slideDown(300);
+                    }
+                });
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

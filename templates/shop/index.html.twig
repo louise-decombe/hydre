@@ -3,25 +3,31 @@
 {% block content %}
 
 
-<div class="container-catalogue">
-<h1 class="titre"> L'HYDRE CATALOGUE </h1>
+    <div class="container-catalogue">
+    <h1 class="titre"> L'HYDRE CATALOGUE </h1>
 
-<div class="categorie-listed">
-<div class="categorie-catalogue"> <a href="{{path('category')}}" class=""> CATEGORIES </a>
-</div>
-<div class="categorie-catalogue"> <a href=""> COUPS DE COEUR </a>
-</div>
-<div class="categorie-catalogue"> <a href="{{path('products')}}" class=""> voir tout </a>
-</div>
-</div>
+    <div class="categorie-listed">
+        <div class="categorie-catalogue"><a href="{{ path('category') }}" class=""> -> </a>
+        </div>
+        <div class="categorie-catalogue"><a href=""> LES NOUVEAUTES </a>
+        </div>
+        <div class="learn-more"><a href="{{ path('products') }}" class=""> TOUT LE CATALOGUE </a>
+        </div>
+    </div>
+    <div class="container-item-new">
 
-<div class="chercher">
+        {% for products in product %}
 
-<h2>  <i class="fas fa-search"></i>
+            <div class="item-listed-new col">
 
-Chercher un livre 
-</h2> <input type="text" placeholder="cherchez un livre ici...">  
- </div>
+                <a href="{{ path('product', {'slug': products.slug}) }}"><img src="/uploads/{{ products.illustration }}"
+                                                                             alt="image produit" class="img-fluid" width=""></a>
+                <!-- <h4> {{ products.name }} </h4>
+<span> {{ products.subtitle }} </span>  -->
+                <p class="item-listed-price"> {{ (products.price / 100) | number_format(2) }}euros </p>
 
+            </div>
+        {% endfor %}
+    </div>
 
 {% endblock %}

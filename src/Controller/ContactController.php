@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Classe\Mail;
-
 use App\Form\ContactType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +20,7 @@ class ContactController extends AbstractController
         $form = $this->createForm(ContactType::class);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->addFlash('notice', 'message envoyé !');
             $datamail = $form->get('email')->getData();
             $datacontent = $form->get('content')->getData();

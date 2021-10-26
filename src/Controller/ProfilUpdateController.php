@@ -17,36 +17,35 @@ class ProfilUpdateController extends AbstractController
     public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
 
-$notification = null;
+        $notification = null;
 
-$user = $this->getUser();
-        
-$form = $this->createForm(UpdateProfilType::class, $user);
+        $user = $this->getUser();
 
-$form->handleRequest($request);
+        $form = $this->createForm(UpdateProfilType::class, $user);
 
-if($form->isSubmitted() && $form->isValid()){
+        $form->handleRequest($request);
 
-    $old_password = $form->get('old_password')->getData();
-    if($encoder->isPasswordValid($user, $old_password)){
-$new_password = $form->get('new_password')->getData();
-$password = $encoder->encodePassword($user, $new_password);
+        if ($form->isSubmitted() && $form->isValid()) {
 
-$user->setPassword($password);
-$doctrine = $this->getDoctrine()->getManager();
-$doctrine->persist($user);
-//flush veut dire exécuter
-$doctrine->flush();
-$notification = "votre mot de passe a été modifié ";
+            $old_password = $form->get('old_password')->getData();
+            if ($encoder->isPasswordValid($user, $old_password)) {
+                $new_password = $form->get('new_password')->getData();
+                $password = $encoder->encodePassword($user, $new_password);
 
-    } else{
-        $notification = "erreur mot de passe";
-    }
-}
+                $user->setPassword($password);
+                $doctrine = $this->getDoctrine()->getManager();
+                $doctrine->persist($user);
+                $doctrine->flush();
+                $notification = "votre mot de passe a été modifié ";
+
+            } else {
+                $notification = "erreur mot de passe";
+            }
+        }
 
         return $this->render('profil/profil_update.html.twig', [
             'form' => $form->createView(),
-            'notification' =>  $notification
+            'notification' => $notification
         ]);
     }
 }

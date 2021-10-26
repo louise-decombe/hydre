@@ -79,6 +79,11 @@ class Product
      */
     private $subcategory;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isNew;
+
 
     public function getId(): ?int
     {
@@ -228,6 +233,18 @@ class Product
     public function setSubcategory(?Subcategory $subcategory): self
     {
         $this->subcategory = $subcategory;
+
+        return $this;
+    }
+
+    public function getIsNew(): ?bool
+    {
+        return $this->isNew;
+    }
+
+    public function setIsNew(bool $isNew): self
+    {
+        $this->isNew = $isNew;
 
         return $this;
     }

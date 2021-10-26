@@ -1,24 +1,19 @@
 # librairie_hydre_a_mille_tetes
+
+Ce projet n'a pas été aboutis mais il a été présenté pour l'obtention de mon titre de développeur web (titre RNCP).
+
 Réalisation d'un site de e-commerce pour la librairie de l'Hydre aux mille tête.
 
 Boutique en ligne avec système de Click and Collect, outils de paiement Stripe et de Mailing avec Mailjet.
 
 Blog et présentation d'événements.
 
-## Authors
-
-* **Louise Décombe** - *Initial work* - [Profile Github](https://github.com/louise-decombe)
-
-* **Nadia Rais** - *Initial work* - [Profile Github](https://github.com/nadia-rais)
-
-* **Léa Martel** - *Initial work* - [Profile Github](https://github.com/lea-martel)
-
 # Pré requis
 
 1. PHP >= 7.4
 2. SQL
 3. Composer
-4. Symfony 5
+4. Symfony 5.3
 
 
 # Installation

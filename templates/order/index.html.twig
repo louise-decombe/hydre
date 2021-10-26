@@ -4,35 +4,37 @@
 
 {% block content %}
 
-<h2> passer la commande </h2>
-<p> Préférences </p>
+    <h2> passer la commande </h2>
+
+    <div class="product-recap">
 
 
-<p> Coordonnés de facturation </p>
+        {% set formHtml %}
+            <div class="facturation">
 
-{% set formHtml %}
-{{  form_start(form, {action:path('order_recap')} ) }}
-{{ form_label(form.addresses, 'choissiez les coordonnés de la commande')}}
-<a href="{{ path('profil_address_add')}}"> ajouter une adresse </a>
-{{  form_end(form) }}
+                {{ form_start(form, {action:path('order_recap')} ) }}
+                <h2>{{ form_label(form.addresses, 'Choissiez les coordonnés de facturation de la commande') }} </h2>
+                <a href="{{ path('profil_address_add') }}"> Ajouter une adresse </a>
+
+                {{ form_end(form) }}
+
+            </div>
+
+        {% endset %}
+
+        {{ formHtml|replace({'[br]': '<br>'})|raw }}
+    </div>
+    <h2> Récapitulatif de la commande </h2>
+    {% for product in cart %}
+
+        <img src="/uploads/{{ product.product.illustration }}" alt="{{ product.product.name }}" height="100px">
+
+        {{ product.product.name }}
+
+        {{ (product.product.price / 100) | number_format(2) }}euros
+        | x {{ product.quantity }}
 
 
- {% endset %}
-
- {{  formHtml|replace({'[br]': '<br>'})|raw }}
-
-<p> Récapitulatif de la commande </p>
-  {% for product in cart %}
-
-<img src="/uploads/{{product.product.illustration}}" alt="{{product.product.name}}" height="100px">
-
-{{product.product.name}}
-
-{{(product.product.price / 100) | number_format(2) }}euros
- | x {{product.quantity}}
-
-
-{% endfor %}
-
+    {% endfor %}
 
 {% endblock %}

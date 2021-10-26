@@ -3,23 +3,20 @@
 namespace App\Controller\Admin;
 
 use App\Classe\Mail;
-use App\Entity\User;
 use App\Entity\Order;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
-use Doctrine\ORM\EntityManagerInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
 
 class OrderCrudController extends AbstractCrudController
 {
@@ -29,8 +26,8 @@ class OrderCrudController extends AbstractCrudController
 
     public function __construct(EntityManagerInterface $entityManager, CrudUrlGenerator $crudUrlGenerator)
     {
-     $this->entityManager = $entityManager;
-     $this->crudUrlGenerator= $crudUrlGenerator;   
+        $this->entityManager = $entityManager;
+        $this->crudUrlGenerator = $crudUrlGenerator;
     }
 
     public static function getEntityFqcn(): string
@@ -38,63 +35,61 @@ class OrderCrudController extends AbstractCrudController
         return Order::class;
     }
 
-
-    // utilisé pour la fonction 'voir' la commande
     public function configureActions(Actions $actions): Actions
     {
 
-        $updatePreparation = Action::new('updatePreparation', 'préparation en cours', 'fas fa-arrow')->linkToCrudAction('updatePreparation');
-        $updateReady = Action::new('updateReady', 'commande prête', 'fas fa-arrow')->linkToCrudAction('updatePreparation');
+        $updatePreparation = Action::new('updatePreparation', 'préparation en cours /', 'fas fa-arrow')->linkToCrudAction('updatePreparation');
+        $updateReady = Action::new('updateReady', 'commande prête /', 'fas fa-arrow')->linkToCrudAction('updateReady');
 
         return $actions
-        ->add('detail', $updatePreparation)
-        ->add('detail', $updateReady)
-
-        ->add('index', 'detail');
+            ->add('detail', $updatePreparation)
+            ->add('detail', $updateReady)
+            ->add('index', 'detail');
     }
 
-    public function updatePreparation(AdminContext $adminContext) {
-        
+    public function updatePreparation(AdminContext $adminContext): \Symfony\Component\HttpFoundation\RedirectResponse
+    {
+
         $order = $adminContext->getEntity()->getInstance();
         $order->setState(2);
         $this->entityManager->flush();
 
-        $this->addFlash('notice', "<strong>la commande  ".$order->getReference()."a bien été mise à jour </strong>");
+        $this->addFlash('notice', "<strong>la commande  " . $order->getReference() . "a bien été mise à jour </strong>");
 
         $url = $this->crudUrlGenerator->build()
-        ->setController(OrderCrudController::class)
-        ->setAction('index')
-        ->generateUrl();
+            ->setController(OrderCrudController::class)
+            ->setAction('index')
+            ->generateUrl();
 
-//        $content = "Bonjour, bonsoir<br> Votre commande est en cours de préparation";
-  //      $mail = new Mail();
-    //    $mail->send($order->getUser()->getEmail(), $order->getUser(),'Votre commande est en cours de préparation, vous recevrez un mail lorsque vous pourrez venir la récupérer', $content );
+        $content = "Bonjour,<br> Votre commande " . $order->getReference() . "est en cours de préparation";
+        $mail = new Mail();
+        $mail->send($order->getUser()->getEmail(), $order->getUser(), 'Votre commande est en cours de préparation, vous recevrez un mail lorsque vous pourrez venir la récupérer', $content);
 
         return $this->redirect($url);
     }
 
-    public function updateReady(AdminContext $adminContext) {
-        
+    public function updateReady(AdminContext $adminContext): \Symfony\Component\HttpFoundation\RedirectResponse
+    {
+
         $order = $adminContext->getEntity()->getInstance();
         $order->setState(3);
         $this->entityManager->flush();
 
-        $this->addFlash('notice', "<strong>la commande  ".$order->getReference()."est prête à être récupérée </strong>");
+        $this->addFlash('notice', "<strong>la commande  " . $order->getReference() . "est prête à être récupérée </strong>");
 
         $url = $this->crudUrlGenerator->build()
-        ->setController(OrderCrudController::class)
-        ->setAction('index')
-        ->generateUrl();
+            ->setController(OrderCrudController::class)
+            ->setAction('index')
+            ->generateUrl();
 
-
-//        $content = "Bonjour, bonsoir".$order->getUser()->getFirstname."<br> Votre commande est prête à être récupérée";
-  //      $mail = new Mail();
-    //    $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(),'Votre commande est prête, vous pouvez venir la récupérer à la boutique.', $content );
-
+        $content = "Bonjour," . $order->getUser()->getFirstname() . "<br> Votre commande est prête à être récupérée";
+        $mail = new Mail();
+        $mail->send($order->getUser()->getEmail(), $order->getUser()->getFirstname(), 'Votre commande' . $order->getReference() . 'est prête, vous pouvez venir la récupérer à la boutique.', $content);
 
         return $this->redirect($url);
+        <
     }
-   
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -108,11 +103,10 @@ class OrderCrudController extends AbstractCrudController
                 'payé' => 1,
                 'préparation en cours' => 2,
                 'prêt à être récupéré' => 3
-        ]),
-            // on masque les produits sur le tableau d'index sinon il y en a trop   
+            ]),
             ArrayField::new('orderDetails', 'produits achetés')->hideOnIndex()
-            
+
         ];
     }
-    
+
 }

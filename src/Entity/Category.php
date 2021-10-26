@@ -24,8 +24,6 @@ class Category
      */
     private $name;
 
- 
-
     /**
      * @ORM\OneToMany(targetEntity=Subcategory::class, mappedBy="category")
      */
